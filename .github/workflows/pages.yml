@@ -34,6 +34,10 @@ jobs:
           cp README.md        _site/README.md
           cp GOVERNANCE.md    _site/GOVERNANCE.md
           cp CONTRIBUTING.md  _site/CONTRIBUTING.md
+          mkdir -p _site/paper
+          cp -R paper/v1 _site/paper/v1
+          cp -R paper/v2 _site/paper/v2
+          find _site -name .DS_Store -delete
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

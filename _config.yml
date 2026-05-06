@@ -13,5 +13,4 @@ exclude:
   - SECURITY.md
   - LICENSE-CODE
   - "*.sh"
-  - paper/
   - vendor/

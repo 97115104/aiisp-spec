@@ -22,7 +22,7 @@ Please use the channel that fits your comment. All channels are read.
 | Report a typo, broken link, or arithmetic error | [New **Errata** issue](https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml) |
 | Suggest specific text in the spec | Open a [Pull Request](https://github.com/97115104/aiisp-spec/pulls) against `aiisp-1.md` |
 | Comment on the companion paper (no GitHub account needed) | Select text at **[humandatacollective.org](https://humandatacollective.org)** and attach an inline comment |
-| Suggest prose or citation changes to the companion paper | Open a [Pull Request](https://github.com/97115104/aiisp-spec/pulls) against `paper/human-data-collective.md` |
+| Suggest prose or citation changes to the companion paper | Open a [Pull Request](https://github.com/97115104/aiisp-spec/pulls) against `paper/v1/human-data-collective.md` |
 | Comment privately (conflict of interest, security) | Email the editor at [`x@97115104.com`](mailto:x@97115104.com) |
 
 If you are commenting in a professional capacity or on behalf of an organization that would be affected by this standard (frontier provider, infrastructure operator, regulator, civil-society group, worker organization), please **disclose that affiliation in your comment**. The structured templates ask for this explicitly. See [`CONTRIBUTING.md`](https://github.com/97115104/aiisp-spec/blob/main/CONTRIBUTING.md) and [`GOVERNANCE.md`](https://github.com/97115104/aiisp-spec/blob/main/GOVERNANCE.md) for the full process.

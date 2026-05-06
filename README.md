@@ -18,7 +18,7 @@ AIISP-1 remains in the repo as a historical and provider-facing draft for reques
 - **Examples:** [`examples/aiisp-2/`](./examples/aiisp-2/)
 - **Reference implementation skeleton:** [`reference/`](./reference/)
 - **Rendered docs:** <https://97115104.github.io/aiisp-spec/>
-- **Companion papers:** [`paper/v1/`](./paper/v1/) and [`paper/v2/`](./paper/v2/)
+- **Companion papers:** [HDC v1 paper folder](https://97115104.github.io/aiisp-spec/paper/v1/) and [HDC v2 paper folder](https://97115104.github.io/aiisp-spec/paper/v2/)
 
 ## AIISP-2 In One Screen
 
@@ -109,8 +109,8 @@ Full guidelines are in [`CONTRIBUTING.md`](./CONTRIBUTING.md). Decision process 
 
 The companion papers are non-normative motivation and background:
 
-- `paper/v1/` contains the original Human Data Collective paper.
-- `paper/v2/` contains the Human Data Collective v2 paper.
+- [HDC v1 paper folder](https://97115104.github.io/aiisp-spec/paper/v1/) contains the original Human Data Collective paper.
+- [HDC v2 paper folder](https://97115104.github.io/aiisp-spec/paper/v2/) contains the Human Data Collective v2 paper.
 
 The normative protocol text lives in `spec/`.
 

@@ -59,8 +59,8 @@ Schema and example pull requests should:
 
 The Human Data Collective papers are non-normative motivation documents:
 
-- [`paper/v1/`](./paper/v1/) contains the HDC v1 paper.
-- [`paper/v2/`](./paper/v2/) contains the HDC v2 paper.
+- [HDC v1 paper folder](https://97115104.github.io/aiisp-spec/paper/v1/) contains the HDC v1 paper.
+- [HDC v2 paper folder](https://97115104.github.io/aiisp-spec/paper/v2/) contains the HDC v2 paper.
 
 Prefer editing the LaTeX source for changes involving figures, tables, diagrams, equations, or citation formatting. Markdown mirrors are useful for prose review, but the editor may reconcile Markdown changes back into the LaTeX source before merging.
 
