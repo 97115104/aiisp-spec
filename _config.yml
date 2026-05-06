@@ -11,6 +11,7 @@ exclude:
   - CODE_OF_CONDUCT.md
   - CONTRIBUTING.md
   - SECURITY.md
-  - LICENSE-CODE
+  - LICENSE.md
+  - LICENSE-SPEC.txt
   - "*.sh"
   - vendor/
