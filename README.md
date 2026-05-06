@@ -1,7 +1,7 @@
 # AIISP - Artificial Intelligence Inference Standards Protocol
 
 [![Status: AIISP-2 Draft v0.1](https://img.shields.io/badge/AIISP--2-draft%20v0.1-orange)](./spec/aiisp-2.md)
-[![Spec License: CC BY 4.0](https://img.shields.io/badge/spec-CC%20BY%204.0-blue)](./LICENSE-SPEC.txt)
+[![Spec License: CC BY 4.0](https://img.shields.io/badge/spec-CC%20BY%204.0-blue)](./LICENSES/CC-BY-4.0.txt)
 [![Code License: MIT](https://img.shields.io/badge/code-MIT-green)](./LICENSE)
 
 AIISP is an open standards family for inference transparency, contributor-aligned routing, public settlement records, and environmental accounting.
@@ -71,8 +71,10 @@ docs/                           # GitHub Pages site
 GOVERNANCE.md
 CHANGELOG.md
 CITATION.cff
-LICENSE                         # CC BY 4.0 for text
-LICENSE-CODE                    # MIT for code
+LICENSE                         # MIT License (code)
+LICENSES/                       # SPDX license directory
+  CC-BY-4.0.txt                 #   CC BY 4.0 (specification)
+  MIT.txt                       #   MIT (code)
 ```
 
 ## Specification Status
