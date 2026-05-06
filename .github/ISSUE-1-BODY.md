@@ -1,4 +1,6 @@
-# AIISP-1 v0.1 — Public review and comment thread
+> **Superseded.** AIISP-1 is now a historical provider-facing disclosure draft. The active HDC standard is [**AIISP-2**](https://github.com/97115104/aiisp-spec/issues/2). New comments should be filed on that thread.
+
+# AIISP-1 v0.1 — Public review and comment thread (superseded by AIISP-2)
 
 > **Specification:** [`aiisp-1.md`](https://github.com/97115104/aiisp-spec/blob/main/spec/aiisp-1.md) · **Rendered:** <https://97115104.github.io/aiisp-spec/> · **Status:** Draft (v0.1, April 2026) · **Editor:** Austin Harshberger ([`x@97115104.com`](mailto:x@97115104.com)) · **License:** CC BY 4.0 (text), MIT (reference code)
 
