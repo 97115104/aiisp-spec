@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://97115104.github.io/aiisp-spec/schemas/aiisp-2/dpo-pair.schema.json",
+  "title": "AIISP-2 Accepted DPO Pair",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "dpo_pair_id",
+    "event_type",
+    "category",
+    "contributor",
+    "prompt_ref",
+    "chosen_ref",
+    "rejected_ref",
+    "verifier",
+    "accepted_at",
+    "hdct_amount"
+  ],
+  "properties": {
+    "version": {
+      "const": "aiisp-2"
+    },
+    "dpo_pair_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "event_type": {
+      "const": "accepted_dpo_pair"
+    },
+    "category": {
+      "$ref": "#/$defs/category"
+    },
+    "contributor": {
+      "$ref": "#/$defs/subject"
+    },
+    "prompt_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "chosen_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "rejected_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "verifier": {
+      "$ref": "#/$defs/subject"
+    },
+    "preference_reason_ref": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hdct_amount": {
+      "$ref": "#/$defs/decimalString"
+    },
+    "settlement_event": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    }
+  },
+  "$defs": {
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"
+    },
+    "decimalString": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  }
+}

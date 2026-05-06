@@ -1,0 +1,49 @@
+{
+  "id": "chatcmpl_aiisp2_001",
+  "object": "chat.completion",
+  "created": 1777646400,
+  "model": "writing/hsc-small-2026-05-01@sha256:8d7c000000000000000000000000000000000000000000000000000000000000",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "This workshop will help residents turn lived experience into publishable essays, grant narratives, and public testimony."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 12,
+    "completion_tokens": 22,
+    "total_tokens": 34
+  },
+  "aiisp": {
+    "version": "aiisp-2",
+    "category": "writing",
+    "model": "writing/hsc-small-2026-05-01@sha256:8d7c000000000000000000000000000000000000000000000000000000000000",
+    "node": "did:pkh:eip155:8453:0x1234567890abcdef1234567890abcdef12345678",
+    "settlement_event": "evt_01jv2writing0001",
+    "settlement_batch": "batch_2026-05-01T12-00Z_001",
+    "environmental_line": {
+      "energy_kwh": "0.00021",
+      "carbon_kg_co2e": "0.00008",
+      "water_liters": "0.0031",
+      "region": "US-CA",
+      "measurement_method": "model_benchmark",
+      "methodology_version": "aiisp2-env-2026-05",
+      "rate_source": "https://example.org/aiisp/rates/US-CA/2026-05.json",
+      "remediation_usd": "0.000004",
+      "remediation_targets": [
+        {
+          "kind": "carbon",
+          "amount_usd": "0.000002"
+        },
+        {
+          "kind": "water",
+          "amount_usd": "0.000002"
+        }
+      ]
+    }
+  }
+}

@@ -1,8 +1,8 @@
-title: AIISP-1
+title: AIISP
 description: >-
-  The Artificial Intelligence Inference Standards Protocol.
-  A minimal, opt-in HTTP standard for declaring and settling the energy,
-  environmental, and human-attribution components of LLM inference requests.
+  The Artificial Intelligence Inference Standards Protocol family.
+  AIISP-2 is the active HDC v2 draft for contributor-aligned inference routing,
+  settlement, environmental accounting, and event-based HDCT issuance.
 url: "https://97115104.github.io"
 baseurl: "/aiisp-spec"
 

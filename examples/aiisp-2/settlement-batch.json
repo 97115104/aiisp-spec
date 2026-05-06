@@ -1,0 +1,68 @@
+{
+  "version": "aiisp-2",
+  "batch_id": "batch_2026-05-01T12-00Z_001",
+  "router": "did:example:router-001",
+  "opened_at": "2026-05-01T12:00:00Z",
+  "closed_at": "2026-05-01T12:15:00Z",
+  "chain_id": 8453,
+  "settlement_contract": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+  "transaction_hash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "event_count": 1,
+  "events": [
+    {
+      "version": "aiisp-2",
+      "event_id": "evt_01jv2writing0001",
+      "event_type": "verified_inference_served",
+      "category": "writing",
+      "contributor": "did:pkh:eip155:8453:0x1234567890abcdef1234567890abcdef12345678",
+      "verifier": "did:example:router-001",
+      "subject_ref": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "hdct_amount": "0.015",
+      "occurred_at": "2026-05-01T12:01:05Z",
+      "accepted_at": "2026-05-01T12:01:07Z",
+      "batch_id": "batch_2026-05-01T12-00Z_001",
+      "chain_id": 8453,
+      "settlement_contract": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+      "routing": {
+        "request_id": "req-router-001",
+        "model": "writing/hsc-small-2026-05-01@sha256:8d7c000000000000000000000000000000000000000000000000000000000000",
+        "node": "did:pkh:eip155:8453:0x1234567890abcdef1234567890abcdef12345678",
+        "usage": {
+          "input_tokens": 12,
+          "output_tokens": 22,
+          "settled_units": "34"
+        }
+      },
+      "environmental_line": {
+        "energy_kwh": "0.00021",
+        "carbon_kg_co2e": "0.00008",
+        "water_liters": "0.0031",
+        "region": "US-CA",
+        "measurement_method": "model_benchmark",
+        "methodology_version": "aiisp2-env-2026-05",
+        "rate_source": "https://example.org/aiisp/rates/US-CA/2026-05.json",
+        "remediation_usd": "0.000004",
+        "remediation_targets": [
+          {
+            "kind": "carbon",
+            "amount_usd": "0.000002"
+          },
+          {
+            "kind": "water",
+            "amount_usd": "0.000002"
+          }
+        ]
+      },
+      "signature": "ed25519:placeholder-signature"
+    }
+  ],
+  "totals": {
+    "hdct_minted": "0.015",
+    "inference_events": 1,
+    "data_contribution_events": 0,
+    "dpo_pair_events": 0,
+    "remediation_usd": "0.000004"
+  },
+  "merkle_root": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "signature": "ed25519:placeholder-batch-signature"
+}

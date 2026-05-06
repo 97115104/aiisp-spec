@@ -3,12 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AIISP-1 — Artificial Intelligence Inference Standards Protocol</title>
-<meta name="description" content="A minimal, opt-in HTTP standard for declaring and settling the energy, environmental, and human-attribution components of a single LLM inference request.">
+<title>AIISP-2 - Contributor-Aligned Inference Routing and Settlement Protocol</title>
+<meta name="description" content="AIISP-2 is the active HDC v2 draft for category routing, contributor-operated inference nodes, event-based HDCT issuance, environmental accounting, and public settlement records.">
 <link rel="canonical" href="https://97115104.github.io/aiisp-spec/">
 <style>
-  /* Deliberately spare. RFC / 80s protocol-document aesthetic.
-     Monospace body, narrow column, no images, ASCII diagram. */
   :root {
     --fg: #1a1a1a;
     --muted: #666;
@@ -39,7 +37,7 @@
     -webkit-font-smoothing: antialiased;
   }
   main {
-    max-width: 78ch;
+    max-width: 82ch;
     margin: 0 auto;
     padding: 2.5rem 1.25rem 5rem;
   }
@@ -59,7 +57,7 @@
   }
   .meta div { display: flex; gap: 0.5rem; }
   .meta .k { color: var(--muted); width: 14ch; flex-shrink: 0; }
-  h1, h2 {
+  h1 {
     font-family: inherit;
     font-weight: 700;
     margin-top: 2.4rem;
@@ -70,14 +68,14 @@
     border-bottom: 1px solid var(--rule);
     padding-bottom: 0.3rem;
   }
-  h1 { margin-top: 0; }
+  h1:first-of-type { margin-top: 0; }
   p { margin: 0.7rem 0; }
   a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
   a:hover { color: var(--accent); }
   .hi { background: var(--hi); padding: 0 0.2em; }
-  pre.diagram {
+  pre.diagram, pre.example {
     font-size: 0.78rem;
-    line-height: 1.25;
+    line-height: 1.3;
     background: transparent;
     border: 1px solid var(--rule);
     padding: 1rem;
@@ -87,14 +85,10 @@
     color: var(--fg);
   }
   pre.example {
-    font-size: 0.82rem;
-    line-height: 1.45;
-    background: transparent;
     border-left: 3px solid var(--rule);
-    padding: 0.4rem 0 0.4rem 1rem;
-    margin: 1rem 0;
-    overflow-x: auto;
-    white-space: pre;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
   }
   ul.plain {
     list-style: none;
@@ -137,11 +131,6 @@
   .actions a:hover { border-color: var(--accent); color: var(--accent); }
   .actions a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
   .actions a.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  hr {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 2.5rem 0;
-  }
   footer {
     color: var(--muted);
     font-size: 0.78rem;
@@ -151,7 +140,7 @@
   }
   footer a { color: var(--muted); }
   @media (max-width: 600px) {
-    pre.banner, pre.diagram { font-size: 0.66rem; }
+    pre.banner, pre.diagram, pre.example { font-size: 0.66rem; }
     .meta .k { width: 12ch; }
   }
 </style>
@@ -162,243 +151,128 @@
 <pre class="banner">
 +============================================================================+
 |                                                                            |
-|   A I I S P - 1                                                                |
-|   Artificial Intelligence Inference Standards Protocol                    |
+|   A I I S P - 2                                                            |
+|   Contributor-Aligned Inference Routing and Settlement Protocol             |
 |                                                                            |
 +============================================================================+
 </pre>
 
 <div class="meta">
-  <div><span class="k">Document:</span><span>AIISP-1</span></div>
-  <div><span class="k">Status:</span><span>Draft for public comment</span></div>
-  <div><span class="k">Version:</span><span>0.1 &nbsp;&middot;&nbsp; April 2026</span></div>
+  <div><span class="k">Document:</span><span>AIISP-2</span></div>
+  <div><span class="k">Status:</span><span>Draft v0.1 for public comment</span></div>
+  <div><span class="k">Date:</span><span>May 2026</span></div>
   <div><span class="k">Editor:</span><span>Austin Harshberger &lt;x@97115104.com&gt;</span></div>
   <div><span class="k">Repository:</span><span><a href="https://github.com/97115104/aiisp-spec">github.com/97115104/aiisp-spec</a></span></div>
-  <div><span class="k">Discussion:</span><span><a href="https://github.com/97115104/aiisp-spec/issues/1">issue #1 &mdash; public review thread</a></span></div>
-  <div><span class="k">License:</span><span>CC&nbsp;BY&nbsp;4.0 (text) &nbsp;&middot;&nbsp; MIT (code)</span></div>
+  <div><span class="k">License:</span><span>CC BY 4.0 (text) / MIT (code)</span></div>
 </div>
 
 <h1>1. What this is</h1>
 
-<p>AIISP-1 is an open standard for breaking the dollar amount you pay
-for a single Large Language Model (LLM) inference request into
-<span class="hi">named, machine-readable parts</span>: how much was
-electricity, how much was water and carbon, how much was the
-provider's premium, and how much is owed to the people whose
-work made the model possible.</p>
+<p>AIISP-2 is the active Human Data Collective v2 draft. It specifies a <span class="hi">contributor-aligned inference routing and settlement layer</span> for category-specific models, contributor-operated inference nodes, accepted data contributions, accepted DPO feedback pairs, event-based HDCT issuance, environmental accounting, and public settlement records.</p>
 
-<p>It is a small specification &mdash; two optional request headers,
-two response headers, one JSON record, one settlement contract.
-It is opt-in, transport-agnostic, and designed to be added to any
-existing HTTP-based inference API in an afternoon.</p>
+<p>AIISP-1 remains published as a historical and provider-facing draft for centralized request-cost disclosure. AIISP-2 changes the counterparty model: the router, nodes, contributors, verifiers, and settlement contract become the core protocol surface.</p>
 
-<p>It is published in the spirit of the early internet RFCs:
-short, composable, opt-in, and owned by no single party.</p>
+<h1>2. The event rule</h1>
 
-<h1>2. Why it is useful</h1>
+<p>HDCT issuance is event-based only. A recorded event cannot be reminted.</p>
 
-<p>Today, when a model answers a question, exactly one number is
-exposed to the requester: the price. That number bundles together
-electricity, cooling water, embodied carbon of the chips,
-amortized cost of the training data, and the provider's margin.
-Because the components are bundled, none of them can be priced,
-audited, or compensated separately.</p>
+<ul class="plain">
+  <li><strong>accepted data contribution</strong> - a verifier accepts a human data contribution.</li>
+  <li><strong>verified inference served</strong> - a node serves inference, or a batch settles a defined inference unit.</li>
+  <li><strong>accepted DPO pair</strong> - a verifier accepts a preference pair.</li>
+</ul>
 
-<p>AIISP-1 unbundles them on the wire, in a format any auditor,
-regulator, or downstream pipeline can read, and settles the
-unbundled amounts on a public ledger so the receiving parties
-&mdash; environmental funds, contributor pools, peer reviewers
-&mdash; actually get paid in the same transaction that bills the
-client.</p>
+<p>AIISP-2 does not define recurring royalties for old data contributions. Later model use does not remint a prior contribution event.</p>
 
 <h1>3. The picture</h1>
 
 <pre class="diagram">
-                            +--------------------+
-   Client (any app) ------&gt; |  Inference         |  &lt;-- normal HTTP today
-   sends one extra header   |  Provider          |
-   X-AIISP-Token: 0x...       |  (Anthropic,       |
-                            |   OpenAI, you,     |
-   gets back one extra      |   anyone)          |
-   header in response       |                    |
-   X-AIISP-Cost: {...}  &lt;---- |                    |
-                            +---------+----------+
-                                      |
-                                      | one settlement transaction,
-                                      | batched on a published cadence
-                                      v
-                            +--------------------+
-                            |  AIISP Settlement    |
-                            |  Contract (Base)   |
-                            +---------+----------+
-                                      |
-        +-----------+-----------+-----+-----+-----------+
-        |           |           |           |           |
-        v           v           v           v           v
-   +---------+ +---------+ +---------+ +---------+ +---------+
-   | Energy  | | Carbon  | | Water   | | Provider| |  AIISP    |
-   | (back   | |  Fund   | |  Fund   | | premium | |  share  |
-   | to      | |         | |         | | (minus  | |  (>= 1% |
-   | provider| |         | |         | | AIISP cut)| | of      |
-   | as cost | |         | |         | |         | | premium)|
-   | recoup) | |         | |         | |         | |         |
-   +---------+ +---------+ +---------+ +---------+ +----+----+
-                                                        |
-                                          80% / 5% / 15% split
-                                                        |
-                                  +---------------------+---------------------+
-                                  |                     |                     |
-                                  v                     v                     v
-                            +-----------+         +-----------+         +-----------+
-                            | Creators  |         |  Peer     |         |Operations |
-                            | (attested |         | reviewers |         |  multisig |
-                            | authors)  |         |           |         |           |
-                            +-----------+         +-----------+         +-----------+
+ Client
+   |
+   | POST /v2/inference
+   | X-AIISP-Category: writing
+   v
+ +------------------+        selects         +------------------+
+ | AIISP-2 Router   | ---------------------> | Category Model   |
+ +--------+---------+                        +------------------+
+          |
+          | dispatches work
+          v
+ +------------------+       serving evidence
+ | Inference Node   | --------------------+
+ +--------+---------+                     |
+          |                               |
+          v                               v
+ +------------------+       batch       +----------------------+
+ | Environmental    | ----------------> | Settlement Contract  |
+ | Line             |                   +----------+-----------+
+ +------------------+                              |
+                                                   | mints HDCT once
+                                                   v
+                              +------------------------------------------+
+                              | data contributors / nodes / DPO reviewers|
+                              +------------------------------------------+
 </pre>
 
-<p class="muted" style="font-size: 0.82rem; color: var(--muted);">
-Figure 1. The wire path of a single AIISP-1 inference request.
-Two extra HTTP headers in, one extra header out, one on-chain
-settlement transaction. Everything else is unchanged.
-</p>
-
-<h1>4. The whole protocol on one screen</h1>
+<h1>4. One request</h1>
 
 <pre class="example">
-REQUEST  --------------------------------------------------------
-  POST /v1/messages HTTP/1.1
-  Host: api.example-provider.com
+REQUEST
+  POST /v2/inference HTTP/1.1
   Content-Type: application/json
-  X-AIISP-Token: 0xA1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4
-  X-AIISP-Settlement: deferred
-  ...
+  X-AIISP-Category: writing
+  X-AIISP-Settlement: batch
 
-RESPONSE -------------------------------------------------------
-  HTTP/1.1 200 OK
-  X-AIISP-Cost: &lt;base64url JSON record, see below&gt;
-  X-AIISP-Settlement-Batch: 2026-04-22T18:00Z-batch-7741
-  ...
-
-DECODED COST RECORD (X-AIISP-Cost) -------------------------------
+BODY
   {
-    "version": "aiisp-1",
-    "cost": {
-      "energy_usd":        "0.000010",
-      "environmental_usd": "0.000020",
-      "premium_usd":       "0.001000",
-      "total_usd":         "0.001030"
-    },
-    "aiisp": {
-      "share_usd": "0.000010",
-      "split":     {"creators": "0.80",
-                    "reviewers": "0.05",
-                    "operations": "0.15"},
-      "token":     "0xA1B2...",
-      "settlement":"deferred"
-    }
+    "messages": [
+      {"role": "user", "content": "Draft a short grant summary."}
+    ],
+    "temperature": 0.2,
+    "max_tokens": 512
   }
+
+RESPONSE HEADERS
+  X-AIISP-Category: writing
+  X-AIISP-Model: writing/hsc-small-2026-05-01@sha256:8d7c...
+  X-AIISP-Node: did:pkh:eip155:8453:0x1234...
+  X-AIISP-Settlement-Event: evt_01jv2writing0001
+  X-AIISP-Settlement-Batch: batch_2026-05-01T12-00Z_001
 </pre>
 
-<p>That is the entire wire format. The full specification, the
-JSON schema, the settlement-contract behaviour, security
-considerations, and a worked end-to-end example are in the
-specification document.</p>
-
 <div class="actions">
-  <a class="primary" href="./spec.html">Read the full specification &rarr;</a>
-  <a href="https://github.com/97115104/aiisp-spec/blob/main/spec/aiisp-1.md">View source (Markdown)</a>
+  <a class="primary" href="./spec.html">Read the active spec</a>
+  <a href="https://github.com/97115104/aiisp-spec/blob/main/spec/aiisp-2.md">View AIISP-2 source</a>
+  <a href="https://github.com/97115104/aiisp-spec/tree/main/spec/schemas/aiisp-2">Schemas</a>
+  <a href="https://github.com/97115104/aiisp-spec/tree/main/examples/aiisp-2">Examples</a>
   <a href="https://github.com/97115104/aiisp-spec">Repository</a>
 </div>
 
-<h1>5. Who this is for</h1>
+<h1>5. Repo map</h1>
 
-<ul class="plain">
-  <li><strong>Inference providers</strong> &mdash; you can implement
-      AIISP-1 in an afternoon and gain a public, auditable record
-      of where each dollar of compute revenue goes.</li>
-  <li><strong>Regulators</strong> &mdash; AIISP-1 produces the
-      machine-readable per-request disclosure that recent state
-      and federal AI legislation is moving toward, without
-      requiring a new agency or a compute threshold.</li>
-  <li><strong>Contributors and creators</strong> &mdash; the
-      attested-author pool is the channel by which the people
-      whose work trained these models can actually be paid, on
-      the same transaction that bills the user of the model.</li>
-  <li><strong>Communities bearing environmental cost</strong>
-      &mdash; the carbon and water shares are routed to dedicated
-      funds, with the explicit goal of moving from
-      restoration-certificate proxies to direct grants in the
-      affected watershed as fast as the on-chain primitives
-      allow.</li>
-  <li><strong>Auditors and academic researchers</strong> &mdash;
-      every settled request is a public on-chain record. Sample,
-      recompute against the published energy rate, compare. The
-      arithmetic is small, the data is open.</li>
-</ul>
+<table class="toc">
+  <tr><td class="n">01</td><td><a href="https://github.com/97115104/aiisp-spec/blob/main/spec/aiisp-2.md">spec/aiisp-2.md</a> - active HDC v2 specification.</td></tr>
+  <tr><td class="n">02</td><td><a href="https://github.com/97115104/aiisp-spec/blob/main/spec/aiisp-1.md">spec/aiisp-1.md</a> - historical/provider-facing draft.</td></tr>
+  <tr><td class="n">03</td><td><a href="https://github.com/97115104/aiisp-spec/tree/main/spec/schemas/aiisp-2">spec/schemas/aiisp-2</a> - JSON schemas.</td></tr>
+  <tr><td class="n">04</td><td><a href="https://github.com/97115104/aiisp-spec/tree/main/examples/aiisp-2">examples/aiisp-2</a> - sample records.</td></tr>
+  <tr><td class="n">05</td><td><a href="https://github.com/97115104/aiisp-spec/tree/main/reference">reference</a> - contracts, router, node, and conformance skeletons.</td></tr>
+  <tr><td class="n">06</td><td><a href="https://github.com/97115104/aiisp-spec/tree/main/paper/v2">paper/v2</a> - HDC v2 companion paper.</td></tr>
+</table>
 
 <h1>6. How to comment</h1>
 
-<p>This draft is open for public review. Comments shape v0.2.</p>
+<p>This draft is open for public review. Use GitHub issues and pull requests for amendments, objections, errata, schemas, examples, and reference implementation work.</p>
 
 <table class="toc">
-  <tr><td class="n">&rarr;</td><td>General comment or question
-    &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/aiisp-spec/issues/1">reply on issue #1</a></td></tr>
-  <tr><td class="n">&rarr;</td><td>Structured objection against a section
-    &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/aiisp-spec/issues/new?template=comment.yml">new Comment issue</a></td></tr>
-  <tr><td class="n">&rarr;</td><td>Propose an amendment or new behaviour
-    &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/aiisp-spec/issues/new?template=amendment.yml">new Amendment issue</a></td></tr>
-  <tr><td class="n">&rarr;</td><td>Typo, broken link, arithmetic error
-    &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml">new Errata issue</a></td></tr>
-  <tr><td class="n">&rarr;</td><td>Suggest specific text
-    &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/aiisp-spec/pulls">open a Pull Request</a></td></tr>
-  <tr><td class="n">&rarr;</td><td>Private comment (COI, security)
-    &nbsp;&mdash;&nbsp;
-    email <a href="mailto:x@97115104.com">x@97115104.com</a></td></tr>
+  <tr><td class="n">-&gt;</td><td><a href="https://github.com/97115104/aiisp-spec/issues/new?template=amendment.yml">Propose an amendment</a></td></tr>
+  <tr><td class="n">-&gt;</td><td><a href="https://github.com/97115104/aiisp-spec/issues/new?template=comment.yml">File a structured comment</a></td></tr>
+  <tr><td class="n">-&gt;</td><td><a href="https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml">Report errata</a></td></tr>
+  <tr><td class="n">-&gt;</td><td><a href="https://github.com/97115104/aiisp-spec/pulls">Open a pull request</a></td></tr>
 </table>
 
-<p>If you are commenting on behalf of an organization that this
-standard would affect &mdash; a frontier provider, a regulator, a
-worker organization, an environmental group &mdash; please
-disclose that affiliation in your comment. See
-<a href="https://github.com/97115104/aiisp-spec/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
-and
-<a href="https://github.com/97115104/aiisp-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>
-for the full process.</p>
-
-<h1>7. Status and disclosure</h1>
-
-<p>AIISP-1 v0.1 is a draft. It is not a ratified standard of any
-standards-development organization. The editor intends to
-submit it for community review through the IETF ART area, the
-Decentralized Identity Foundation, and the W3C AI Provenance
-community group.</p>
-
-<p>The editor (Austin Harshberger) is the principal of Happy Stack
-Calculus LLC, which intends to operate the reference
-implementation of AIISP-1. This is a present and ongoing conflict
-of interest. The plan, documented in
-<a href="https://github.com/97115104/aiisp-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>,
-is to migrate ratification authority for v1.0 to a
-multi-stakeholder body before AIISP-1 is declared stable. The
-editor's compensation, once any settlement flows exist, will be
-published on the same on-chain ledger as contributor
-compensation.</p>
-
 <footer>
-  <p>AIISP-1 specification text licensed
-    <a href="https://creativecommons.org/licenses/by/4.0/">CC&nbsp;BY&nbsp;4.0</a>.
-    Reference implementation MIT.
-    Source on
-    <a href="https://github.com/97115104/aiisp-spec">GitHub</a>.
-    Companion paper: <em>What if AI served everyone as a public good
-    and got better in the process?</em> by A. Harshberger, April 2026.</p>
-  <p>This page is intentionally plain. No tracking, no analytics,
-    no JavaScript on the homepage. View source.</p>
+  <p>AIISP-2 specification text licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Reference implementation code MIT. Source on <a href="https://github.com/97115104/aiisp-spec">GitHub</a>.</p>
+  <p>This page is intentionally plain. No tracking, no analytics, no JavaScript on the homepage.</p>
 </footer>
 
 </main>

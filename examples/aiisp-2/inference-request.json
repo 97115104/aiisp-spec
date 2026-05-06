@@ -1,0 +1,14 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Draft a short grant summary for a community writing workshop."
+    }
+  ],
+  "temperature": 0.2,
+  "max_tokens": 512,
+  "stream": false,
+  "metadata": {
+    "client_request_id": "req-client-001"
+  }
+}

@@ -23,6 +23,7 @@ If this PR is substantive, please confirm:
 - [ ] The Revision history in Appendix B has been updated.
 - [ ] Backward compatibility is documented in the PR description.
 - [ ] Any wire-format changes bump the spec to a new minor version.
+- [ ] AIISP-2 changes preserve event-based HDCT issuance and do not reintroduce recurring royalties.
 
 ## Disclosure
 

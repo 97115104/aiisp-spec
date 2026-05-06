@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://97115104.github.io/aiisp-spec/schemas/aiisp-2/contribution.schema.json",
+  "title": "AIISP-2 Accepted Data Contribution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "contribution_id",
+    "event_type",
+    "category",
+    "contributor",
+    "content_ref",
+    "rights_attestation",
+    "verifier",
+    "accepted_at",
+    "hdct_amount"
+  ],
+  "properties": {
+    "version": {
+      "const": "aiisp-2"
+    },
+    "contribution_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "event_type": {
+      "const": "accepted_data_contribution"
+    },
+    "category": {
+      "$ref": "#/$defs/category"
+    },
+    "contributor": {
+      "$ref": "#/$defs/subject"
+    },
+    "content_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "description": "Hash, CID, registry pointer, or encrypted storage reference. Raw private content should not appear here."
+    },
+    "rights_attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attester", "claim", "signed_at"],
+      "properties": {
+        "attester": {
+          "$ref": "#/$defs/subject"
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "signed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    },
+    "verifier": {
+      "$ref": "#/$defs/subject"
+    },
+    "quality_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hdct_amount": {
+      "$ref": "#/$defs/decimalString"
+    },
+    "settlement_event": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    }
+  },
+  "$defs": {
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"
+    },
+    "decimalString": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    }
+  }
+}

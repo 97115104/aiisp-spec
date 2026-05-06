@@ -1,8 +1,16 @@
 name: Comment on the spec
-description: A specific objection, question, or suggestion against a numbered section of AIISP-1.
+description: A specific objection, question, or suggestion against a numbered section of an AIISP draft.
 title: "[comment] "
-labels: ["comment", "aiisp-1"]
+labels: ["comment"]
 body:
+  - type: input
+    id: target
+    attributes:
+      label: Target spec
+      description: Which spec is this comment for?
+      placeholder: "AIISP-2"
+    validations:
+      required: true
   - type: input
     id: section
     attributes:

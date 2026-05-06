@@ -1,14 +1,14 @@
 name: Propose an amendment
-description: Propose a substantive new feature, header, or behaviour for AIISP-1 (or a new AIISP-N spec).
+description: Propose a substantive new feature, header, event type, schema field, or behavior for an AIISP draft.
 title: "[amendment] "
-labels: ["amendment", "aiisp-1"]
+labels: ["amendment"]
 body:
   - type: input
     id: target
     attributes:
       label: Target spec
-      description: Which spec is this amendment for? (AIISP-1, or proposing AIISP-2 / AIISP-3 / etc.)
-      placeholder: "AIISP-1"
+      description: Which spec is this amendment for?
+      placeholder: "AIISP-2"
     validations:
       required: true
   - type: textarea

@@ -1,124 +1,144 @@
-# AIISP — Artificial Intelligence Inference Standards Protocol
+# AIISP - Artificial Intelligence Inference Standards Protocol
 
-[![Status: Draft v0.1](https://img.shields.io/badge/status-draft%20v0.1-orange)](./spec/aiisp-1.md)
+[![Status: AIISP-2 Draft v0.1](https://img.shields.io/badge/AIISP--2-draft%20v0.1-orange)](./spec/aiisp-2.md)
 [![Spec License: CC BY 4.0](https://img.shields.io/badge/spec-CC%20BY%204.0-blue)](./LICENSE)
 [![Code License: MIT](https://img.shields.io/badge/code-MIT-green)](./LICENSE-CODE)
-[![Discussion](https://img.shields.io/badge/discuss-issue%20%231-brightgreen)](https://github.com/97115104/aiisp-spec/issues/1)
 
-A minimal, transport-agnostic, opt-in HTTP standard for declaring and settling
-the energy, environmental, and human-attribution components of a single Large
-Language Model inference request.
+AIISP is an open standards family for inference transparency, contributor-aligned routing, public settlement records, and environmental accounting.
 
-Published in the spirit of the early IETF RFCs that defined TCP, IP, HTTP, and
-TLS — small, composable, opt-in, and owned by no single party.
+The active draft is **AIISP-2: Contributor-Aligned Inference Routing and Settlement Protocol**. AIISP-2 is the canonical standards track for the Human Data Collective v2 proposal. It defines category-specific model routing, contributor-operated inference nodes, accepted human data contributions, accepted DPO feedback pairs, event-based HDCT issuance, environmental lines, and settlement batches.
 
-## Quick links
+AIISP-1 remains in the repo as a historical and provider-facing draft for request-cost disclosure by centralized inference providers. It is not deleted or replaced.
 
-- **Read the spec** → [`spec/aiisp-1.md`](./spec/aiisp-1.md)
-- **Read it rendered** → <https://97115104.github.io/aiisp-spec/>
-- **Read the companion paper** → <https://humandatacollective.org> *(commentable)*
-- **Discuss v0.1** → [issue #1](https://github.com/97115104/aiisp-spec/issues/1)
-- **Propose a change** → [open a PR](https://github.com/97115104/aiisp-spec/pulls) or [file an amendment](https://github.com/97115104/aiisp-spec/issues/new?template=amendment.yml)
+## Quick Links
 
-## Repository layout
+- **Active spec:** [`spec/aiisp-2.md`](./spec/aiisp-2.md)
+- **Historical/provider-facing draft:** [`spec/aiisp-1.md`](./spec/aiisp-1.md)
+- **Schemas:** [`spec/schemas/aiisp-2/`](./spec/schemas/aiisp-2/)
+- **Examples:** [`examples/aiisp-2/`](./examples/aiisp-2/)
+- **Reference implementation skeleton:** [`reference/`](./reference/)
+- **Rendered docs:** <https://97115104.github.io/aiisp-spec/>
+- **Companion papers:** [`paper/v1/`](./paper/v1/) and [`paper/v2/`](./paper/v2/)
 
+## AIISP-2 In One Screen
+
+```http
+POST /v2/inference
+Content-Type: application/json
+X-AIISP-Category: writing
+X-AIISP-Settlement: batch
 ```
+
+The router selects a registered Category Model and an eligible Inference Node, returns a normal model response, and records a settlement event:
+
+```json
+{
+  "version": "aiisp-2",
+  "event_type": "verified_inference_served",
+  "category": "writing",
+  "contributor": "did:pkh:eip155:8453:0x1234...",
+  "hdct_amount": "0.015",
+  "batch_id": "batch_2026-05-01T12-00Z_001"
+}
+```
+
+HDCT issuance is event-based only. A recorded event cannot be reminted. Valid issuance events are:
+
+1. accepted data contribution
+2. verified inference served, or a settled inference unit
+3. accepted DPO pair
+
+AIISP-2 does not define recurring royalties for old data contributions.
+
+## Repository Layout
+
+```text
 .
-├── spec/                    # Normative specification documents
-│   ├── README.md
-│   └── aiisp-1.md           # AIISP-1 — the inference transparency layer
-├── paper/                   # Companion paper (motivation, not normative)
-│   ├── human-data-collective.tex   # LaTeX source (canonical)
-│   ├── human-data-collective.md    # Markdown mirror
-│   ├── human-data-collective.pdf   # Typeset edition
-│   ├── human-data-collective.bib   # Bibliography
-│   └── generate-latex.sh           # pdflatex × 3 build script
-├── docs/                    # GitHub Pages site (index + spec renderer)
-├── .github/                 # Issue templates, PR template, Pages workflow
-├── CONTRIBUTING.md          # How to file an issue or open a PR
-├── GOVERNANCE.md            # How decisions about the standard are made
-├── CHANGELOG.md             # Revision history
-├── CITATION.cff             # Machine-readable citation metadata
-├── CODE_OF_CONDUCT.md       # Contributor Covenant v2.1
-├── SECURITY.md              # Private security disclosure
-├── LICENSE                  # CC BY 4.0 — applies to spec & paper text
-└── LICENSE-CODE             # MIT — applies to scripts & reference code
+spec/
+  aiisp-1.md                    # Historical/provider-facing draft
+  aiisp-2.md                    # Active HDC v2 draft
+  schemas/aiisp-2/              # Draft v0.1 JSON schemas
+examples/aiisp-2/               # Example AIISP-2 records
+reference/
+  contracts/                    # HDCT and settlement contract skeleton
+  router/                       # Router skeleton
+  node/                         # Inference-node skeleton
+  conformance/                  # Conformance-test skeleton
+paper/
+  v1/                           # HDC v1 companion paper
+  v2/                           # HDC v2 companion paper
+docs/                           # GitHub Pages site
+GOVERNANCE.md
+CHANGELOG.md
+CITATION.cff
+LICENSE                         # CC BY 4.0 for text
+LICENSE-CODE                    # MIT for code
 ```
 
-## Status
+## Specification Status
 
-This is a **Draft (v0.1, April 2026)** circulated for public comment. It is
-not, at the date of writing, a ratified standard of any standards-development
-organization. The author intends to submit this document to the IETF ART area,
-the Decentralized Identity Foundation, and the W3C AI Provenance community
-group, in that order.
+AIISP-2 is **Draft v0.1, May 2026**. It is published for public comment and is not yet a ratified standard of any standards-development organization.
 
-The **protocol family** is called **AIISP**. This **specification** is
-**AIISP-1**, *The Artificial Intelligence Inference Standards Protocol*.
-Future specifications will be **AIISP-2** (Attribution), **AIISP-3**
-(Governance), and so on, following the IETF RFC numbering convention.
+The active AIISP-2 components are:
 
-## How to contribute
+- `POST /v2/inference`
+- category-specific model routing
+- contributor-operated or Collective-operated inference nodes
+- accepted data contribution records
+- accepted DPO pair records
+- event-based settlement events
+- HDCT minting by settlement contract
+- environmental lines for inference events
+- public settlement batches
 
-The repository hosts two things you can contribute to: the **spec** in
-[`spec/aiisp-1.md`](./spec/aiisp-1.md) and the **companion paper** in
-[`paper/`](./paper/). Both follow the same PR-and-issue workflow against
-different files.
+## How To Contribute
 
-| You want to… | Use this |
+Use issues and pull requests for amendments, objections, errata, schemas, examples, and reference implementation work.
+
+| You want to... | Use this |
 | --- | --- |
-| Comment generally on AIISP-1 v0.1 | Reply on [issue #1](https://github.com/97115104/aiisp-spec/issues/1) |
-| File a specific objection on a section | [Comment template](https://github.com/97115104/aiisp-spec/issues/new?template=comment.yml) |
-| Propose a new feature, header, or behaviour | [Amendment template](https://github.com/97115104/aiisp-spec/issues/new?template=amendment.yml) |
-| Report a typo or broken citation | [Errata template](https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml) |
-| Propose textual changes | Open a [Pull Request](https://github.com/97115104/aiisp-spec/pulls) |
-| Comment on a specific paper passage | Select text at <https://humandatacollective.org> |
+| Propose a spec change | [Amendment issue](https://github.com/97115104/aiisp-spec/issues/new?template=amendment.yml) |
+| File a specific objection | [Comment issue](https://github.com/97115104/aiisp-spec/issues/new?template=comment.yml) |
+| Report a typo or broken citation | [Errata issue](https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml) |
+| Propose text, schemas, examples, or code | [Pull request](https://github.com/97115104/aiisp-spec/pulls) |
 | Disclose a security issue privately | See [`SECURITY.md`](./SECURITY.md) |
 
-Full guidelines are in [`CONTRIBUTING.md`](./CONTRIBUTING.md). Decision
-process and versioning are in [`GOVERNANCE.md`](./GOVERNANCE.md).
+Full guidelines are in [`CONTRIBUTING.md`](./CONTRIBUTING.md). Decision process and versioning are in [`GOVERNANCE.md`](./GOVERNANCE.md).
 
-## Building the paper locally
+## Working With The Papers
 
-```bash
-cd paper && ./generate-latex.sh
-```
+The companion papers are non-normative motivation and background:
 
-Requires TeX Live or MacTeX (`brew install --cask mactex-no-gui` on macOS).
-See [`paper/README.md`](./paper/README.md) for the full editorial workflow.
+- `paper/v1/` contains the original Human Data Collective paper.
+- `paper/v2/` contains the Human Data Collective v2 paper.
+
+The normative protocol text lives in `spec/`.
+
+To rebuild a paper PDF from a LaTeX source file, run `pdflatex` from the corresponding paper directory.
 
 ## License
 
-- **Specification text** in [`spec/`](./spec/) and **paper text** in [`paper/`](./paper/)
-  are licensed [Creative Commons Attribution 4.0 International](./LICENSE)
-  so any party may implement, mirror, translate, or fork without permission.
-- **Scripts and any reference implementation code** are licensed under the
-  [MIT License](./LICENSE-CODE).
+- Specification text, schemas, examples, and paper text are licensed [Creative Commons Attribution 4.0 International](./LICENSE).
+- Reference implementation code is licensed under the [MIT License](./LICENSE-CODE).
 
-## Citing this document
+## Citing This Document
 
 ```bibtex
-@misc{aiisp1_2026,
+@misc{aiisp2_2026,
   author       = {Harshberger, Austin},
-  title        = {AIISP-1: The Artificial Intelligence Inference Standards Protocol},
+  title        = {AIISP-2: Contributor-Aligned Inference Routing and Settlement Protocol},
   year         = {2026},
-  month        = apr,
+  month        = may,
   version      = {Draft v0.1},
   howpublished = {Open standard, GitHub repository},
-  url          = {https://github.com/97115104/aiisp-spec},
-  note         = {Public review thread: \url{https://github.com/97115104/aiisp-spec/issues/1}}
+  url          = {https://github.com/97115104/aiisp-spec}
 }
 ```
 
 Plain prose:
 
-> Harshberger, A. (2026). *AIISP-1: The Artificial Intelligence Inference Standards Protocol* (Draft v0.1). <https://github.com/97115104/aiisp-spec>
-
-## Code of Conduct
-
-This project follows the [Contributor Covenant v2.1](./CODE_OF_CONDUCT.md). By
-participating you agree to abide by its terms.
+> Harshberger, A. (2026). *AIISP-2: Contributor-Aligned Inference Routing and Settlement Protocol* (Draft v0.1). <https://github.com/97115104/aiisp-spec>
 
 ## Contact
 
-Editor: Austin Harshberger · `x@97115104.com`
+Editor: Austin Harshberger, `x@97115104.com`

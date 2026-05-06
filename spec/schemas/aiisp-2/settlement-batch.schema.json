@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://97115104.github.io/aiisp-spec/schemas/aiisp-2/settlement-batch.schema.json",
+  "title": "AIISP-2 Settlement Batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "batch_id",
+    "router",
+    "opened_at",
+    "closed_at",
+    "event_count",
+    "events",
+    "totals"
+  ],
+  "properties": {
+    "version": {
+      "const": "aiisp-2"
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "router": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "opened_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "closed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "chain_id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "settlement_contract": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
+    "transaction_hash": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{64}$"
+    },
+    "event_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "./settlement-event.schema.json"
+      }
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hdct_minted"],
+      "properties": {
+        "hdct_minted": {
+          "$ref": "#/$defs/decimalString"
+        },
+        "inference_events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "data_contribution_events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dpo_pair_events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "remediation_usd": {
+          "$ref": "#/$defs/decimalString"
+        }
+      }
+    },
+    "merkle_root": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{64}$"
+    },
+    "signature": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    }
+  },
+  "$defs": {
+    "decimalString": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+    }
+  }
+}

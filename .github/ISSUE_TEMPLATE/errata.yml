@@ -7,7 +7,7 @@ body:
     id: version
     attributes:
       label: Spec version
-      placeholder: "v0.1"
+      placeholder: "AIISP-2 v0.1"
     validations:
       required: true
   - type: input

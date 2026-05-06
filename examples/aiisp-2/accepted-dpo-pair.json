@@ -1,0 +1,15 @@
+{
+  "version": "aiisp-2",
+  "dpo_pair_id": "dpo_01jv2writing0001",
+  "event_type": "accepted_dpo_pair",
+  "category": "writing",
+  "contributor": "did:example:reviewer-001",
+  "prompt_ref": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "chosen_ref": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "rejected_ref": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "verifier": "did:example:verifier-writing-001",
+  "preference_reason_ref": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+  "accepted_at": "2026-05-01T12:05:00Z",
+  "hdct_amount": "3.0",
+  "settlement_event": "evt_01jv2dpo0001"
+}

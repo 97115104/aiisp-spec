@@ -1,25 +1,29 @@
 cff-version: 1.2.0
-message: "If you cite or implement AIISP-1, please reference this draft."
-title: "AIISP-1: The Artificial Intelligence Inference Standards Protocol"
+message: "If you cite or implement AIISP-2, please reference this draft."
+title: "AIISP-2: Contributor-Aligned Inference Routing and Settlement Protocol"
 abstract: >
-  AIISP-1 specifies a minimal, transport-agnostic, opt-in HTTP standard for
-  declaring and settling the energy, environmental, and human-attribution
-  components of a single Large Language Model inference request.
+  AIISP-2 specifies a contributor-aligned inference routing and settlement
+  protocol for the Human Data Collective v2 proposal, including category-specific
+  model routing, contributor-operated inference nodes, accepted data and DPO
+  contribution events, event-based HDCT issuance, environmental accounting, and
+  public settlement batches.
 authors:
   - family-names: Harshberger
     given-names: Austin
     email: x@97115104.com
     affiliation: Happy Stack Calculus LLC
 version: "0.1"
-date-released: "2026-04-22"
+date-released: "2026-05-06"
 license: CC-BY-4.0
 repository-code: "https://github.com/97115104/aiisp-spec"
 url: "https://github.com/97115104/aiisp-spec"
 keywords:
-  - llm
+  - aiisp
+  - hdc
+  - hdct
   - inference
-  - standards
-  - transparency
+  - routing
+  - settlement
   - environmental-accounting
-  - attribution
+  - contributor-alignment
 type: standard

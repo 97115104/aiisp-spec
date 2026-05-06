@@ -1,0 +1,19 @@
+{
+  "version": "aiisp-2",
+  "contribution_id": "data_01jv2writing0001",
+  "event_type": "accepted_data_contribution",
+  "category": "writing",
+  "contributor": "did:example:writer-001",
+  "content_ref": "ipfs://bafybeigdyrzt00000000000000000000000000000000000000000000000000",
+  "rights_attestation": {
+    "attester": "did:example:writer-001",
+    "claim": "Contributor represents that they authored the submitted text and have the right to license it to the Collective.",
+    "signed_at": "2026-05-01T11:50:00Z",
+    "signature": "ed25519:placeholder-signature"
+  },
+  "verifier": "did:example:verifier-writing-001",
+  "quality_score": 0.91,
+  "accepted_at": "2026-05-01T12:00:00Z",
+  "hdct_amount": "12.5",
+  "settlement_event": "evt_01jv2data0001"
+}

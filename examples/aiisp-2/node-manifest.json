@@ -1,0 +1,20 @@
+{
+  "version": "aiisp-2",
+  "node_id": "did:pkh:eip155:8453:0x1234567890abcdef1234567890abcdef12345678",
+  "operator": "did:example:contributor-node-001",
+  "endpoint": "https://node-001.example.org/v2/inference",
+  "public_key": "did:example:contributor-node-001#keys-1",
+  "supported_categories": ["writing", "learning"],
+  "supported_models": [
+    {
+      "model": "writing/hsc-small-2026-05-01@sha256:8d7c000000000000000000000000000000000000000000000000000000000000",
+      "category": "writing",
+      "max_context_tokens": 8192
+    }
+  ],
+  "settlement_wallet": "0x1234567890abcdef1234567890abcdef12345678",
+  "energy_region": "US-CA",
+  "measurement_method": "model_benchmark",
+  "software_version": "aiisp-node-reference-0.1.0",
+  "health_url": "https://node-001.example.org/health"
+}

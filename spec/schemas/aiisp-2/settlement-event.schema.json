@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://97115104.github.io/aiisp-spec/schemas/aiisp-2/settlement-event.schema.json",
+  "title": "AIISP-2 Settlement Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "event_id",
+    "event_type",
+    "category",
+    "contributor",
+    "verifier",
+    "subject_ref",
+    "hdct_amount",
+    "occurred_at",
+    "accepted_at"
+  ],
+  "properties": {
+    "version": {
+      "const": "aiisp-2"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9._:-]+$"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "accepted_data_contribution",
+        "verified_inference_served",
+        "settled_inference_unit",
+        "accepted_dpo_pair"
+      ]
+    },
+    "category": {
+      "$ref": "#/$defs/category"
+    },
+    "contributor": {
+      "$ref": "#/$defs/subject"
+    },
+    "verifier": {
+      "$ref": "#/$defs/subject"
+    },
+    "subject_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "description": "Content-addressed or registry-addressed reference to the accepted work or served inference unit."
+    },
+    "hdct_amount": {
+      "$ref": "#/$defs/decimalString"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "chain_id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "settlement_contract": {
+      "$ref": "#/$defs/address"
+    },
+    "transaction_hash": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{64}$"
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "node": {
+          "$ref": "#/$defs/subject"
+        },
+        "usage": {
+          "$ref": "#/$defs/usage"
+        }
+      }
+    },
+    "environmental_line": {
+      "$ref": "./environmental-line.schema.json"
+    },
+    "signature": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "verified_inference_served"
+          }
+        }
+      },
+      "then": {
+        "required": ["routing", "environmental_line"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "settled_inference_unit"
+          }
+        }
+      },
+      "then": {
+        "required": ["routing", "environmental_line"]
+      }
+    }
+  ],
+  "$defs": {
+    "address": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"
+    },
+    "decimalString": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "settled_units": {
+          "$ref": "#/$defs/decimalString"
+        }
+      }
+    }
+  }
+}
